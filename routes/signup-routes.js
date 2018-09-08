@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
-const hbs = require('hbs');
 const bodyParser = require('body-parser');
-const User = require('../model/user-recruiter.model');
+const Endorser = require('../model/user-endorser.model');
+const Seeker = require('../model/user-seeker.model');
+const Recruiter = require('../model/user-recruiter.model');
 var localStrategy = require('passport-local').Strategy;
 var mongoose1 = require('../db/mongoose');
 const bcrypt = require('bcrypt');
@@ -28,54 +29,84 @@ router.get('/logout', (req, res) => {
 });
 
 router.post('/submit/endorser', urlencodedParser, (req, res) => {
-    console.log(req.body);
+    var endorser = new Endorser({
+        first:  req.body.first,
+        last: req.body.last,
+        location: req.body.location,
+        email: req.body.email,
+        organization: req.body.organization,
+        position: req.body.position,
+        about: req.body.about,
+        password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm
+    });
+
+    console.log(endorser);
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(endorser.password, salt, (err, hash) => {
+            endorser.password = hash;
+            endorser.save().then(() => {
+                res.render('landing');
+            });
+        });
+    });
 });
 
 router.post('/submit/seeker', urlencodedParser, (req, res) => {
-    console.log(req.body);
+    var seeker = new Seeker({
+        first:  req.body.first,
+        last: req.body.last,
+        email: req.body.email,
+        location: req.body.location,
+        phone: req.body.number,
+        skills: req.body.skills,
+        q1: req.body.q1,
+        q2: req.body.q2,
+        q3: req.body.q3,
+        q4: req.body.q4,
+        q5: req.body.q5,
+        q6: req.body.q6,
+        q7: req.body.q7,
+        q8: req.body.q8,
+        q9: req.body.q9,
+        q10: req.body.q10,
+        password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm
+    });
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(seeker.password, salt, (err, hash) => {
+            seeker.password = hash;
+            seeker.save().then(() => {
+                res.render('landing');
+            });
+        });
+    });
 });
 
 router.post('/submit/recruiter', urlencodedParser, (req, res) => {
-    console.log(req.body);
-    //var user = new User();
+    var recruiter = new Recruiter({
+        first:  req.body.first,
+        last: req.body.last,
+        company: req.body.company,
+        location: req.body.location,
+        positions: req.body.positions,
+        email: req.body.email,
+        req: req.body.requirements,
+        res: req.body.responsibilities,
+        password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm
+    });
 
-    // bcrypt.genSalt(10, (err, salt) => {
-    //     console.log('gensalt', salt);
-    //     bcrypt.hash(user.password, salt, (err, hash) => {
-    //         user.password = hash;
-    //         console.log('after', user);
-    //         user.save().then(() => {
-    //             res.render('login');
-    //         });
-    //         // var transporter = nodemailer.createTransport({
-    //         //     service: 'gmail',
-    //         //     auth: {
-    //         //       user: 'billxsheng@gmail.com',
-    //         //       pass: ''
-    //         //     }
-    //         //   });
-    //         //   var mailOptions = {
-    //         //     from: 'youremail@gmail.com',
-    //         //     to: user.email,
-    //         //     subject: 'Sending Email using Node.js',
-    //         //     text: 'ezpz'
-    //         //   };
-    //     });
-    // });
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(recruiter.password, salt, (err, hash) => {
+            recruiter.password = hash;
+            recruiter.save().then(() => {
+                res.render('landing');
+            });
+        });
+    });
 }); 
-
-//google callback route
-router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.redirect('/profile');
-});
-
-//auth with google
-router.get('/google', passport.authenticate("google", {
-    scope: ['profile']
-}), (req, res) => {
-    //handle with passport
-    res.send('logging in with google');
-});
-
 
 module.exports = router;

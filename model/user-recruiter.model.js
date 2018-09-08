@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
-
-var userSchema = mongoose.Schema({
-        firstName:  String,
-        lastName: String,
+var recruiterSchema = mongoose.Schema({
+        first:  String,
+        last: String,
+        company: String,
+        location: String,
+        positions: String,
         email: String,
-        password: {
-            type: String
-    }
+        res: String,
+        req: String,
+        password: String,
+        passwordConfirm: String
 });
 
-var User = module.statics = module.exports = mongoose.model('User', userSchema);
+var Recruiter = module.statics = module.exports = mongoose.model('recruiter', recruiterSchema);
 
 module.statics.emailVeri = function(email) {
-    var User = this;
-    return User.findOne({email}).then((user) => {
+    var Recruiter = this;
+    return Recruiter.findOne({email}).then((user) => {
         if(user) {
             return Promise.reject();
         }
@@ -25,8 +27,8 @@ module.statics.emailVeri = function(email) {
 
 
 module.statics.findByCredentials = function(email, password) {
-    var User = this;
-    return User.findOne({email: email}).then((user) => {
+    var Recruiter = this;
+    return Recruiter.findOne({email: email}).then((user) => {
         console.log(user);
         if(!user) {
             return Promise.reject();
@@ -47,6 +49,6 @@ module.statics.findByCredentials = function(email, password) {
 
 module.exports.getUserById = function(username, callback) {
 var query = {username: username};
-User.findOne(query, callback);
+Recruiter.findOne(query, callback);
 };
 
