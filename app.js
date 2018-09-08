@@ -147,14 +147,30 @@ app.post('/profile', [urlencodedParser,
     passport.authenticate('local-login')],
     function (req, res) {
         if(req.body.accountType === 'recruiter') {
-            //find one and get it then render
             res.render('recruiter-profile', {
-                
+                first: req.user.first,
+                last: req.user.last,
+                location: req.user.location, 
+                company: req.user.company,
+                email: req.user.email,
+                website: req.user.website,
+                about: req.user.about,
+                positions: req.user.positions,
+                req: req.user.req,
+                res: req.user.res
+
             });
         } else if(req.body.accountType === 'seeker') {
             res.render('seeker-profile');
         } else {
-            res.render('endorser-profile');
+            res.render('endorser-profile', {
+                first: req.user.first,
+                last: req.user.last,
+                organizaton: req.user.organization,
+                about: req.user.about,
+                location: req.user.location,
+                position: req.user.position
+            });
         }
     });
 

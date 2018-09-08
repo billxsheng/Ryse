@@ -7,6 +7,8 @@ var recruiterSchema = mongoose.Schema({
         company: String,
         location: String,
         positions: String,
+        website: String,
+        about: String,
         email: String,
         res: String,
         req: String,
