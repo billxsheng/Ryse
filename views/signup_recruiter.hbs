@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Signup | Employer</title>
+    <title>Signup | Recruiter</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -24,14 +24,16 @@
     </div>
     <h2 class="welcome">Welcome to FelIn! Please enter the following information to post a job.</h2>
     <div class="form">
-        <form action="/action_page.php">
+        <form action="/signup/submit/recruiter" method="POST">
             <p class="Questions">General Information</p>
-            Company: <input type="text" name="Company"><br>
-            Location: <input type="text" name="Location"><br>
-            Position(s): <input type="text" name="Position"><br>
-            Phone Number: <input type="tel" name="Number"><br>
-            Job Responsibilities: <input type="text" name="Responsibilities"><br>
-            Job Requirements: <input type="text" name="Requirements"><br><br>
+            First Name: <input type="text" name="first"><br>
+            Last Name: <input type="text" name="last"><br>
+            Company: <input type="text" name="company"><br>
+            Location: <input type="text" name="location"><br>
+            Position(s): <input type="text" name="position"><br>
+            Email: <input type="email" name="email"><br>
+            Company Responsibilities: <textarea type="text" name="responsibilities"></textarea><br>
+            Company Requirements: <textarea type="text" name="requirements"></textarea><br><br>
             <p class="Questions">Password</p>
             Password: <input type="password" name="password"><br>
             Re-enter Password: <input type="password" name="password-confirm"><br>

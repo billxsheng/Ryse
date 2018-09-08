@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const bcrypt = require('bcrypt-nodejs');
 const bcrypt = require('bcrypt');
 
 
@@ -11,11 +10,6 @@ var userSchema = mongoose.Schema({
         password: {
             type: String
     }
-    
-    //username: String,
-   // googleId: String,
-    
-
 });
 
 var User = module.statics = module.exports = mongoose.model('User', userSchema);

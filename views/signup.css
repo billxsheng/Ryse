@@ -342,3 +342,7 @@ p
 * {
     font-family: 'Raleway';
 }
+
+button, a {
+    cursor: pointer;
+}
