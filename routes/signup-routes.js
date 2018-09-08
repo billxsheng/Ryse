@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Endorser = require('../model/user-endorser.model');
 const Seeker = require('../model/user-seeker.model');
 const Recruiter = require('../model/user-recruiter.model');
-var localStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var mongoose1 = require('../db/mongoose');
 const bcrypt = require('bcrypt');
 
@@ -16,11 +16,11 @@ router.get('/recruiter', (req, res) => {
 });
 
 router.get('/seeker', (req, res) => {
-    res.render('signup_employee');
+    res.render('signup_seeker');
 });
 
 router.get('/endorser', (req, res) => {
-    res.render('signup_support');
+    res.render('signup_endorser');
 });
 
 router.get('/logout', (req, res) => {
@@ -108,5 +108,6 @@ router.post('/submit/recruiter', urlencodedParser, (req, res) => {
         });
     });
 }); 
+
 
 module.exports = router;

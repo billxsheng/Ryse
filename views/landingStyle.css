@@ -102,3 +102,25 @@ pic img {
         filter: grayscale(0%);
     }
 }
+
+.log {
+    color: #000;
+    height: 30px;
+    width: 150px;
+}
+
+.login select {
+    color: #000;
+    height: 30px;
+    width: 100px;
+}
+
+.btn-submit {
+    color: #000;
+}
+
+.login {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}

@@ -4,11 +4,13 @@ const authRoutes = require('./routes/signup-routes');
 const keys = require('./db/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const path = require('path');
 const User = require('./model/user-recruiter.model');
 const bodyParser = require('body-parser');
 var LocalStrategy = require('passport-local').Strategy;
-const url = require('url');    
+const Recruiter = require('./model/user-recruiter.model');
+const Endorser = require('./model/user-endorser.model');
+const Seeker = require('./model/user-seeker.model');
+
 
 //express app
 const app = express();
@@ -51,7 +53,7 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/why-should-you-hire', (req, res) => {
+app.get('/why-hire-from-us', (req, res) => {
     res.render('whyhire');
 });
 
@@ -106,40 +108,56 @@ var accountCheck = function(req, res, next) {
     });
 }
 
-
-//passport middleware
 passport.use('local-login', new LocalStrategy({
     usernameField: "email", passwordField: "password", passReqToCallback: true
 },
     function (req, username, password, done) {
-        User.findByCredentials(req.body.email, req.body.password).then((user) => {
-            if (user) {
-                done(null, user);
-            }
-        }).catch(() => {
-            done(null, false);
-        });
+
+        if(req.body.accountType === 'recruiter') {
+            Recruiter.findByCredentials(req.body.email, req.body.password).then((user) => {
+                if (user) {
+                    done(null, user);
+                }
+            }).catch(() => {
+                done(null, false);
+            });
+        } else if(req.body.accountType == 'endorser') {
+            Endorser.findByCredentials(req.body.email, req.body.password).then((user) => {
+                if (user) {
+                    done(null, user);
+                }
+            }).catch(() => {
+                done(null, false);
+            });
+        } else {
+            Seeker.findByCredentials(req.body.email, req.body.password).then((user) => {
+                if (user) {
+                    done(null, user);
+                }
+            }).catch(() => {
+                done(null, false);
+            });
+        }
+        
     }
 ));
 
 //Login POST 
-app.post('/profile', [urlencodedParser, inputCheck, accountCheck,
+app.post('/profile', [urlencodedParser,
     passport.authenticate('local-login')],
     function (req, res) {
-        res.redirect(url.format({
-            pathname:"/profile/",
-            query: {
-                "fn": req.user.firstName,
-                "ln": req.user.lastName,
-                "email": req.body.email
-            }
-        }));
+        if(req.body.accountType === 'recruiter') {
+            res.render('recruiter-profile');
+        } else if(req.body.accountType === 'seeker') {
+            res.render('seeker-profile');
+        } else {
+            res.render('endorser-profile');
+        }
     });
-
 
 app.get('/logout', (req, res) => {
     req.logout();
-    res.render('login');
+    res.render('landing');
 });
 
 
