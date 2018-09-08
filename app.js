@@ -1,6 +1,6 @@
 const express = require('express');
 const profileRoutes = require('./routes/profile-routes');
-const authRoutes = require('./routes/auth-routes');
+const authRoutes = require('./routes/signup-routes');
 const keys = require('./db/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -18,10 +18,7 @@ app.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 //deploy 
-const port = process.env.PORT || 3000
-
-//getting statics
-app.use(express.static(path.join(__dirname, '/views')));
+const port = process.env.PORT || 3000;
 
 //cookie session
 app.use(cookieSession({
@@ -36,18 +33,30 @@ app.use(passport.session());
 //set up view engine
 app.set('view engine', 'hbs');
 
+//getting statics
+app.use("/Assets", express.static(__dirname + '/Assets'));
+app.use('/views', express.static(__dirname + '/views'));
+
 //setup routes
 app.use('/profile', profileRoutes);
-app.use('/auth', authRoutes);
+app.use('/signup', authRoutes);
 
 //route to first page
 app.get('/', (req, res) => {
-    res.render("start");
+    res.render("landing");
 });
 
 //login page route
 app.get('/login', (req, res) => {
     res.render('login');
+});
+
+app.get('/why-should-you-hire', (req, res) => {
+    res.render('whyhire');
+});
+
+app.get('/about', (req, res) => {
+    res.render('about');
 });
 
 // app.get('/profile', (req, res) => {

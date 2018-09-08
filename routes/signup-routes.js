@@ -6,19 +6,20 @@ const User = require('../model/user-model');
 var localStrategy = require('passport-local').Strategy;
 var mongoose1 = require('../db/mongoose');
 const bcrypt = require('bcrypt');
-var nodemailer = require('nodemailer');
 
-//body-parser stuff
 router.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-//auth login
-router.get('/signupredirect', (req, res) => {
-    res.render('signupredirect');
+router.get('/employer', (req, res) => {
+    res.render('signup_employer');
 });
 
-router.get('/signup', (req, res) => {
-    res.render('signup');
+router.get('/seeker', (req, res) => {
+    res.render('signup_employee');
+});
+
+router.get('/endorser', (req, res) => {
+    res.render('signup_support');
 });
 
 router.get('/logout', (req, res) => {
@@ -26,7 +27,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-router.post('/signup/local', urlencodedParser, (req, res) => {
+router.post('/signup/employee', urlencodedParser, (req, res) => {
     if(req.body.firstName === "" || req.body.lastName === "") {
         return res.render('signup', {
             error: "Please enter a valid name."

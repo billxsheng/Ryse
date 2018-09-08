@@ -107,7 +107,7 @@ h5,
 h6,
 p
 {
-    font-family: Raleway;
+    font-family: 'Raleway';
 }
 
 
@@ -320,7 +320,7 @@ p
 
 .form {
     font-size: 120%;
-    font-family: Raleway;
+    font-family: 'Raleway';
     text-align: right;
     margin-right: 530px;
     line-height: 1.9;
@@ -337,4 +337,8 @@ p
     background-color: #009966;
     border-radius: 10px;
     margin-right: 80px;
+}
+
+* {
+    font-family: 'Raleway';
 }
