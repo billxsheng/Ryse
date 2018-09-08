@@ -161,13 +161,31 @@ app.post('/profile', [urlencodedParser,
 
             });
         } else if(req.body.accountType === 'seeker') {
-            res.render('seeker-profile');
+            res.render('seeker-profile', {
+                first: req.user.first ,
+                last: req.user.last,
+                location: req.user.location,
+                phone: req.user.phone,
+                email: req.user.email,
+                skills: req.user.skills,
+                q1: req.user.q1,
+                q2: req.user.q2,
+                q3: req.user.q3,
+                q4: req.user.q4,
+                q5: req.user.q5,
+                q6: req.user.q6,
+                q7: req.user.q7,
+                q8: req.user.q8,
+                q9: req.user.q9,
+                q10: req.user.q10
+            });
         } else {
             res.render('endorser-profile', {
                 first: req.user.first,
                 last: req.user.last,
-                organizaton: req.user.organization,
+                organization: req.user.organization,
                 about: req.user.about,
+                email: req.user.email,
                 location: req.user.location,
                 position: req.user.position
             });
