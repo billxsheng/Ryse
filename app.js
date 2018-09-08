@@ -147,7 +147,10 @@ app.post('/profile', [urlencodedParser,
     passport.authenticate('local-login')],
     function (req, res) {
         if(req.body.accountType === 'recruiter') {
-            res.render('recruiter-profile');
+            //find one and get it then render
+            res.render('recruiter-profile', {
+                
+            });
         } else if(req.body.accountType === 'seeker') {
             res.render('seeker-profile');
         } else {
