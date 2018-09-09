@@ -108,6 +108,11 @@ h6,
 p
 {
     font-family: 'Raleway';
+
+}
+
+h3 {
+    color: white;
 }
 
 
@@ -310,7 +315,7 @@ p
 }
 
 .welcome {
-    margin-left: 10px;
+    text-align: center;
 }
 
 .header {
@@ -328,7 +333,10 @@ p
 
 .Questions {
     font-weight: bold;
-    margin-right: 80px;
+}
+
+body {
+    height: 120vh;
 }
 
 .btn-submit {
@@ -336,7 +344,6 @@ p
     text-decoration: none;
     background-color: #009966;
     border-radius: 10px;
-    margin-right: 80px;
 }
 
 * {
