@@ -21,6 +21,7 @@ var seekerSchema = mongoose.Schema({
         q8: String,
         q9: String,
         q10: String,
+        endorsements: Array,
         password: String,
         passwordConfirm: String
 });

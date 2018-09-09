@@ -10,6 +10,7 @@ body {
     background-color: white;
     box-shadow: 0 0 0px rgba(0, 0, 0, 0.06);
     color: #545454;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     margin: 0 auto;
@@ -175,6 +176,56 @@ img {
 
 pic img {
     margin-right: 20px;
+}
+
+.star-rating {
+    direction: rtl;
+    display: inline-block;
+    padding: 20px
+}
+
+.star-rating input[type=radio] {
+    display: none
+}
+
+.star-rating label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.fullbody {
+        background-color: rgba(0, 153, 94, 0.8);
+}
+.outerlayer {
+    background-color: white;
+    color: rgba(0, 153, 94, 0.8);
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+    background-size:cover;
+    padding: 0;
+    padding-top: 20px;
+    padding-bottom: 50px; 
+    font-family: "avenir";
+    font-size: 125%;
+    border-radius: 20px;
+    
+}
+
+.mybutton {
+    background-color: rgba(0, 153, 94, 0.8);;
+    color:white;
+    border-color: black;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type=radio]:checked ~ label {
+    color: #f2b600
 }
 
 @keyframes colorize {

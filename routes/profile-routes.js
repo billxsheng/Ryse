@@ -40,7 +40,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
             req: req.user.req,
             res: req.user.res
         });
-    } else {
+    } else if(req.user.type === 'endorser') {
         res.render('endorser-profile', {
             first: req.user.first,
             last: req.user.last,
@@ -91,6 +91,30 @@ router.post('/recruiter/search', [ensureRecruiter, urlencodedParser], (req, res)
 router.post('/recruiter/search/username', [ensureRecruiter, urlencodedParser], (req, res) => {
     res.redirect(`/profile/${req.body.username}`);
 });
+
+router.post('/endorse', [ensureEndorser, urlencodedParser], (req, res) => {
+    console.log(req.user);
+    var endorseObject = {
+        first: req.user.first,
+        last: req.user.last,
+        position: req.user.position,
+        organization: req.user.organization
+    }
+
+    console.log(endorseObject);
+
+    Seeker.findOneAndUpdate({'username': req.body.username}, {$push: {'endorsements': endorseObject }});
+    res.send('Endorsement successfully sent.')
+});
+
+function ensureEndorser(req, res, next) {
+    console.log(req);
+    if (req.user.type === 'endorser') {
+        return next();
+    } else {
+        res.render('landing');
+    }
+}
 
 function ensureRecruiter(req, res, next) {
     if (req.user.type === 'recruiter') {

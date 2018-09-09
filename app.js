@@ -180,7 +180,7 @@ app.post('/profile', [urlencodedParser,
                 q9: req.user.q9,
                 q10: req.user.q10
             });
-        } else {
+        } else if(req.body.accountType === 'endorser') {
             res.render('endorser-profile', {
                 first: req.user.first,
                 last: req.user.last,
