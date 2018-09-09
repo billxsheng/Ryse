@@ -47,8 +47,15 @@
         <p>{{req}}</p>
         <h3>Company Responsibilities</h3>
         <p>{{res}}</p>
-        <form>
-            <input class="col-md-4 form-control" type="search" placeholder="Candidate Search" />
+        <h3>Candidate Search</h3>
+        <form method="POST" action="/profile/recruiter/search">
+            <input class="col-md-4 form-control" name="location" type="search" placeholder="Location" />
+            <input class="col-md-4 form-control" name="skills" type="search" placeholder="Skills" />
+            <input type="submit" class="btn-submit col-md-2 form-control" />
+        </form>
+        <h3>Candidate Search by Username</h3>
+        <form method="POST" action="/profile/recruiter/search/username">
+            <input class="col-md-4 form-control" name="username" type="search" placeholder="Username" />
             <input type="submit" class="btn-submit col-md-2 form-control" />
         </form>
         <a href="/logout" type="button" class="btn">Sign Out</a>

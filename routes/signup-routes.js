@@ -30,6 +30,7 @@ router.get('/logout', (req, res) => {
 
 router.post('/submit/endorser', urlencodedParser, (req, res) => {
     var endorser = new Endorser({
+        type: 'endorser',
         first:  req.body.first,
         last: req.body.last,
         location: req.body.location,
@@ -55,6 +56,8 @@ router.post('/submit/endorser', urlencodedParser, (req, res) => {
 
 router.post('/submit/seeker', urlencodedParser, (req, res) => {
     var seeker = new Seeker({
+        type: 'seeker',
+        username: req.body.username,
         first:  req.body.first,
         last: req.body.last,
         email: req.body.email,
@@ -87,6 +90,7 @@ router.post('/submit/seeker', urlencodedParser, (req, res) => {
 
 router.post('/submit/recruiter', urlencodedParser, (req, res) => {
     var recruiter = new Recruiter({
+        type: 'recruiter',
         first:  req.body.first,
         last: req.body.last,
         company: req.body.company,

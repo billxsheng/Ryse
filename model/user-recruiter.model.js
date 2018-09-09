@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 var recruiterSchema = mongoose.Schema({
+        type: String,
         first:  String,
         last: String,
         company: String,

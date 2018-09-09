@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 var endorserSchema = mongoose.Schema({
+        type: String,
         first:  String,
         last: String,
         location: String,

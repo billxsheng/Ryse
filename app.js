@@ -164,6 +164,7 @@ app.post('/profile', [urlencodedParser,
             res.render('seeker-profile', {
                 first: req.user.first ,
                 last: req.user.last,
+                username: req.user.username,
                 location: req.user.location,
                 phone: req.user.phone,
                 email: req.user.email,

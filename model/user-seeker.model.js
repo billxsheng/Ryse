@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 
 
 var seekerSchema = mongoose.Schema({
+        type: String,
+        username: String,
         first: String,
         last: String,
         email: String,
